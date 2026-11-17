@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Examination</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background: #f0f4ff;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1d4ed8;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 15px 0 8px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin: 22px 0;
+            border-radius: 10px;
+        }
+
+        .question h3 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+
+        .option {
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #1d4ed8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Java Online Examination</h1>
+
+    <p class="subtitle">Answer all five multiple-choice questions.</p>
+
+    <form action="/submit" method="post">
+
+        <label>Student Name</label>
+        <input type="text" name="studentName"
+               placeholder="Enter your full name" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email"
+               placeholder="Enter your email address" required>
+
+        <div th:each="q : ${questions}" class="question">
+
+            <h3>
+                <span th:text="${q.id}"></span>.
+                <span th:text="${q.question}"></span>
+            </h3>
+
+            <label class="option"
+                   th:each="option : ${q.options}">
+                <input type="radio"
+                       th:name="'q' + ${q.id}"
+                       th:value="${option.key}"
+                       required>
+                <span th:text="${option.key + '. ' + option.value}"></span>
+            </label>
+
+        </div>
+
+        <button type="submit">Submit Examination</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

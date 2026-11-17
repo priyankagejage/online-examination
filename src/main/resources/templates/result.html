@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Examination Result</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background: #f0f4ff;
+            color: #1e293b;
+        }
+
+        .result-card {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .student-info {
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .student-info p {
+            margin: 12px 0;
+        }
+
+        .score {
+            font-size: 45px;
+            font-weight: bold;
+            color: #1d4ed8;
+            margin: 20px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px;
+        }
+
+        .pass {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 13px 25px;
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background: #1e40af;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="result-card">
+
+    <h1>Examination Result</h1>
+
+    <p>Your examination has been submitted successfully!</p>
+
+    <div class="student-info">
+
+        <p>
+            <strong>Student Name:</strong>
+            <span th:text="${studentName}"></span>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <span th:text="${email}"></span>
+        </p>
+
+    </div>
+
+    <p>Your Score</p>
+
+    <div class="score">
+        <span th:text="${score}"></span> /
+        <span th:text="${totalQuestions}"></span>
+    </div>
+
+    <h3>
+        Percentage:
+        <span th:text="${#numbers.formatDecimal(percentage, 1, 2)}"></span>%
+    </h3>
+
+    <div class="status"
+         th:classappend="${result == 'PASS'} ? ' pass' : ' fail'"
+         th:text="${result}">
+    </div>
+
+    <br>
+
+    <a href="/">Back to Home</a>
+
+</div>
+
+</body>
+</html>
